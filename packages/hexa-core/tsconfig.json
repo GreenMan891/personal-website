@@ -1,0 +1,29 @@
+{
+  "extends": "@repo/typescript-config/react-library.json", // Optional: if you have a base config
+  "compilerOptions": {
+    // --- CRITICAL SETTINGS FOR GENERATING TYPES ---
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "emitDeclarationOnly": false,
+    
+    // --- STANDARD REACT & MODULE SETTINGS ---
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": ["DOM", "ESNext"],
+    
+    // --- STRICTNESS & PATHS ---
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    
+    // --- OUTPUT ---
+    "outDir": "dist"
+  },
+  "include": ["src"], // Only compile files in the 'src' directory
+  "exclude": ["node_modules", "dist"] // Don't compile these folders
+}
