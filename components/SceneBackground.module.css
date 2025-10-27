@@ -1,0 +1,46 @@
+.backgroundWrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+.gridLayerStatic,
+.gridLayerMoving {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+    mix-blend-mode: normal;
+    pointer-events: none;
+    background-repeat: repeat;
+}
+
+.gridLayerStatic {
+    opacity: var(--layer-opacity, 0.7);
+    transform: translate3d(0, 0, 0);
+}
+
+.gridLayerMoving {
+
+    top: calc(-1 * var(--tile-size, 60px));
+    left: calc(-1 * var(--tile-size, 60px));
+    width: calc(100% + var(--tile-size, 60px));
+    height: calc(100% + var(--tile-size, 60px));
+
+    background-repeat: repeat;
+    will-change: transform;
+    z-index: 1;
+    animation: gridMoveDiagonal var(--anim-duration, 13s) linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: var(--layer-opacity, 0.55);
+}
+
+@keyframes gridMoveDiagonal {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(var(--tile-size, 60px), var(--tile-size, 60px), 0);
+    }
+}

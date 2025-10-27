@@ -1,0 +1,685 @@
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  height: calc(100vh - 48px);
+}
+
+.headerText {
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  flex-shrink: 0;
+}
+
+
+
+.imageDisplay {
+  position: relative;
+  border: 7px solid black;
+  width: 100%;
+  margin-top: 10px;
+  box-sizing: border-box;
+  display: flex;
+  min-height: 45vh;
+  flex-shrink: 0;
+  z-index: 5;
+  background-color: rgb(207, 207, 207);
+  color: #555;
+  border-radius: 15px;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.topBar,
+.bottomBar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 10px;
+  box-sizing: border-box;
+  z-index: 10;
+  pointer-events: none;
+}
+
+
+.bottomBar {
+  bottom: 0;
+}
+
+.topLeft,
+.topCenter,
+.topRight,
+.bottomLeft,
+.bottomRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wifiIcon {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.wifiIcon span {
+  display: inline-block;
+  background-color: #0eaadf;
+  width: 7px;
+  transform: scale(1.25);
+  border-radius: 1px;
+  border: 0.5px solid #fff;
+}
+
+.wifiIcon span:nth-child(1) {
+  height: 10px;
+}
+
+.wifiIcon span:nth-child(2) {
+  height: 14px;
+}
+
+.wifiIcon span:nth-child(3) {
+  height: 18px;
+}
+
+.internetButton {
+  background-image: linear-gradient(to bottom, #33ccff, #25b0df);
+  color: white;
+  padding: 5px 30px;
+  border-radius: 12px;
+  font-size: 15px;
+  border: 1px solid #fff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.date {
+  font-family: 'Open Sans';
+  font-size: 1rem;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.time {
+  font-family: 'Open Sans';
+  font-size: 1rem;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.batteryIcon {
+  width: 30px;
+  height: 20px;
+  border: 2px solid #555;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1px;
+}
+
+.batteryIcon::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 6px;
+  background-color: #555;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.batteryLevel {
+  width: 100%;
+  height: 100%;
+  background-color: #32b4e7;
+  border-radius: 1px;
+}
+
+
+.bottomLeft,
+.bottomRight {
+  background: #e6e6e6;
+  border: 2px solid #c4c4c4;
+  padding: 3px 15px;
+  border-radius: 15px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.playIcon {
+  background-color: #ddd34d;
+  border: 2px solid #8c8528;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  padding-left: 2px;
+  box-sizing: border-box;
+}
+
+.startCounter {
+  font-size: 20px;
+  min-width: 20px;
+  text-align: left;
+}
+
+.githubLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  padding: 0px 10px;
+  cursor: pointer;
+}
+
+.githubLink svg {
+  width: 32px;
+  height: 32px;
+  fill: #555;
+  transition: fill 0.2s ease-in-out;
+}
+
+.githubLink:hover svg {
+  fill: #000;
+}
+
+.buttonIcon {
+  background-color: #555;
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.bgLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fgLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: auto;
+  display: block;
+}
+
+.appGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 17px;
+  row-gap: 12px;
+  padding: 90px 20px;
+  overflow-y: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  transform: scale(1.3);
+  position: relative;
+  isolation: isolate;
+}
+
+.appGrid::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background-color: #dfdddb;
+  border-radius: 25px;
+  border: 3px solid #f0f0f0;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  top: 70px;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+}
+
+.gridTitle {
+  grid-column: 1 / -1;
+  margin: 0 0 0px 0;
+  padding-left: 0px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #3d3d3d;
+  text-align: center;
+}
+
+.appIconContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.appIcon,
+.appIconEmpty {
+  aspect-ratio: unset;
+  border-radius: 20px;
+  width: 140px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 4px solid transparent;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  padding: 8px;
+}
+
+
+.appIconContainer .appIcon::before {
+  content: attr(data-app-name);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: #333;
+  border: #ffffff solid 2px;
+  padding: 3px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.appIconContainer:hover .appIcon::before {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.3s;
+}
+
+
+.appIconImageWrapper,
+.emptyIconImageWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border: #999 solid 3px;
+  border-color: #999;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 0.05s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.emptyIconImage {
+  transform: scale(2);
+}
+
+
+.appIconImageWrapper img,
+.emptyIconImageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 1px;
+}
+
+.appIconContainer:hover .appIconImageWrapper:not(.appIconImageWrapperSelected) {
+  border-color: #6cd9df;
+}
+
+.appIconImageWrapperSelected,
+.emptyIconImageWrapperSelected {
+  border: 3px solid #00BFFF;
+  box-shadow: 0 4px 10px rgba(0, 191, 255, 0.4);
+}
+
+.startButtonContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.startButton {
+  padding: 10px 60px;
+  font-family: 'Open Sans';
+  font-size: 25px;
+  font-weight: 500;
+  color: black;
+  background-color: #dbdbdb;
+  border: 4px solid #00BFFF;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40px;
+  box-shadow: inset 10px 15px rgba(256, 256, 256, 0.4);
+  z-index: 10;
+}
+
+.startButton:hover {
+  background-color: #d0d0d0;
+}
+
+.startButton:disabled {
+  border-color: #999;
+  background-color: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.floatingButton {
+  position: absolute;
+  bottom: 00px;
+  z-index: 100;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  border: 3px solid #00BFFF;
+  ;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 191, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-out;
+  color: #555;
+}
+
+
+.floatingButton:hover {
+  transform: translateY(-5px);
+  color: #000;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 15px 5px rgba(0, 191, 255, 0.7);
+}
+
+.floatingButton svg {
+  width: 32px;
+  height: 32px;
+}
+
+.bottomLeftFloat {
+  left: 30px;
+}
+
+.bottomRightFloat {
+  right: 30px;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.modalContent {
+  background-image: repeating-linear-gradient(to bottom,
+      #e8e8e8,
+      #e8e8e8 2px,
+      #cfcfcf 5px,
+      #cfcfcf 5px);
+  background-size: 100% 10px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 3px solid #D1CDC4;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 800px;
+  height: 80vh;
+  max-height: 700px;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  animation: slideUp 0.4s ease-out backwards;
+}
+
+.modalLayout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+}
+
+.profileColumn {
+  flex: 0 0 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 20px;
+  max-width: 160px;
+}
+
+.profilePicture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.textColumn {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 20px 0;
+  color: #333;
+}
+
+.textColumn h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 2rem;
+  font-family: 'Open Sans', sans-serif;
+  color: #1a1a1a;
+}
+
+.textColumn p {
+  margin-bottom: 16px;
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #444;
+}
+
+.textColumn h4 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  border-bottom: 2px solid #D1CDC4;
+  padding-bottom: 4px;
+}
+
+.skillsList {
+  padding-left: 20px;
+  margin: 0;
+
+}
+
+.skillsList li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: #444;
+}
+
+
+.favoriteGamesContainer {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 0;
+}
+
+.favoritesTitle {
+  margin: 0;
+  padding-bottom: 5px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.viewerGrid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+
+.miniViewerBox {
+  width: 100%;
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+  min-height: 0;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #c4beb5;
+  border: 2px solid #b5afa6;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modalCloseButton:hover {
+  background-color: #b5afa6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.helpModalLayout {
+  display: block;
+  overflow-y: auto;
+  padding: 30px 40px;
+}
+
+.helpModalLayout h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+}
+
+.modalIntroText {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.helpModalLayout h4 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  border-bottom: 2px solid #D1CDC4;
+  padding-bottom: 4px;
+}
+
+.helpModalLayout h3 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  border-bottom: 2px solid #b1aea7;
+  padding-bottom: 4px;
+}
+
+.instructionList {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.instructionList li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  font-size: 1rem;
+  color: #444;
+}
+
+.instructionList li::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00BFFF;
+  font-size: 0.9rem;
+}

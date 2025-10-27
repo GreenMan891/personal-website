@@ -1,0 +1,18 @@
+
+.overlayWrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  display: block;
+  transform-origin: center center;
+}
+
+.overlayImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+  pointer-events: none;
+  user-select: none;
+}

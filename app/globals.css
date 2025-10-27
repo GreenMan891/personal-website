@@ -1,0 +1,109 @@
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  background-color: black;
+  max-width: 100vw;
+  overflow-x: hidden;
+  cursor: url('https://www.rw-designer.com/cursor-download.php?id=23165&size=512'), auto !important;
+}
+
+* {
+  cursor: url('https://www.rw-designer.com/cursor-download.php?id=23165&size=512'), auto !important;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #d4d4d4;
+
+}
+
+.mainContentWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.mainContentColumn {
+  width: 100%;
+  max-width: 1100px;
+  padding: 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  background-image: repeating-linear-gradient(to bottom,
+      #e8e8e8,
+      #e8e8e8 2px,
+      #cfcfcf 5px,
+      #cfcfcf 5px);
+  background-size: 100% 10px;
+}
+.mainContentColumn::before,
+.mainContentColumn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  pointer-events: none;
+}
+.mainContentColumn::before {
+  left: 0;
+  background: linear-gradient(to right, #c5c5c5, #707070, #c5c5c5);
+}
+.mainContentColumn::after {
+  right: 0;
+  background: linear-gradient(to left, #c5c5c5, #707070, #c5c5c5);
+}
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+}
+
+img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+  user-select: none;
+}

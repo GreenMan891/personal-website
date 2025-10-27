@@ -1,0 +1,33 @@
+{
+  "name": "personal-website2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "biome check",
+    "format": "biome format --write"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.3.0",
+    "hexa-game-core": "file:../playhexa.gg/playhexa.gg/packages/hexa-core",
+    "next": "15.5.4",
+    "pdfjs-dist": "^5.4.296",
+    "phaser": "^3.90.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-pdf": "^10.2.0",
+    "react-unity-webgl": "^10.1.6",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.180.0",
+    "typescript": "^5"
+  }
+}
