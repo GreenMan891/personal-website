@@ -197,6 +197,7 @@ export default function Hexapage() {
                     headerContent={
                         <img src="/hexagonHorizontal.png" alt="Hexa Logo" className={styles.logo} />
                     }
+                    githubLink='https://github.com/GreenMan891/UntitledHexagonGame'
                     tabs={hexaTabs} 
                 >
                     <div style={{ position: 'relative', width: '1100px', height: '618.75px' }}>

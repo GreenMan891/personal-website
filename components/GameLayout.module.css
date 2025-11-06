@@ -15,7 +15,6 @@
     overflow: hidden;
     border: 1px solid #cac8c1;
 }
-
 .topBar {
     background-image: repeating-linear-gradient(to bottom,
             #dbdbdb,
@@ -26,16 +25,37 @@
     padding: 10px 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-shrink: 0;
     border: #7c7c7c 5px solid;
+    position: relative;
+}
+
+.githubLink {
+    position: absolute;
+    right: 10px;
+    padding: 8px 16px;
+    background: linear-gradient(to bottom, #e6e5e0, #cac8c1);
+    border: 2px solid #a0a0a0;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.githubLink:hover {
+    background: linear-gradient(to bottom, #d6d6d6, #e4e6db);
+    border-color: #888;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .logo {
     height: 70px;
     object-fit: contain;
-    margin: 0 auto;
     display: block;
-
 }
 
 .gameArea {

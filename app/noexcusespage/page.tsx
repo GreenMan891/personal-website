@@ -107,6 +107,7 @@ export default function Noexcusespage() {
                     headerContent={
                         <img src="/noexcusespagelogo.png" alt="Hexa Logo" className={styles.logo} />
                     }
+                    githubLink='https://github.com/GreenMan891/noexcuses'
                     tabs={noexcusesTabs}
                 >
                     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ummPFC2t3iA?si=rzrS0lxegVLJisXY" title="YouTube video player" frameBorder="0"

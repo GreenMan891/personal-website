@@ -157,6 +157,7 @@ export default function Balatropage() {
                     headerContent={
                         <img src="/balatropage/notquitebalatrologo.png" alt="Logo" className={styles.logo} />
                     }
+                    githubLink='https://github.com/GreenMan891/BalatroPlaydate'
                     tabs={balatroTabs}
                 >
                     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/aTnK3H9dF1Y?si=cdM4Ea65Krf9-QZ4" title="YouTube video player" frameBorder="0"

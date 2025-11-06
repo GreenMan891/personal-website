@@ -12,13 +12,15 @@ export interface Tab {
 interface GameLayoutProps {
     children: React.ReactNode;
     headerContent: React.ReactNode;
+    githubLink: string;
     tabs: Tab[];
 }
 
 const GameLayout: React.FC<GameLayoutProps> = ({
     children,
     headerContent,
-    tabs = [] 
+    githubLink,
+    tabs = []
 }) => {
     const [activeTabId, setActiveTabId] = useState<string>(tabs[0]?.id);
     const [visitedTabs, setVisitedTabs] = useState<Record<string, boolean>>({});
@@ -40,7 +42,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({
     };
 
     const handleTabClick = (tabId: string) => {
-        if(tabId == activeTabId) {
+        if (tabId == activeTabId) {
             return;
         }
         setActiveTabId(tabId);
@@ -56,6 +58,16 @@ const GameLayout: React.FC<GameLayoutProps> = ({
         <div className={styles.container}>
             <header className={styles.topBar}>
                 {headerContent}
+                {githubLink && (
+                    <a
+                        href={githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.githubLink}
+                    >
+                        Source Code
+                    </a>
+                )}
             </header>
 
             <main className={styles.gameArea}>

@@ -76,6 +76,7 @@ export default function Carpage() {
                     headerContent={
                         <img src="/carpage/carLogoForPage2.png" alt="Logo" className={styles.logo} />
                     }
+                    githubLink='https://github.com/GreenMan891/Creating-a-Racing-Game-in-Unity'
                     tabs={carTabs}
                 >
                     <UnityGame buildPath="/unity/WebBuild" />
