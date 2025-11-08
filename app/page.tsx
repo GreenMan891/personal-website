@@ -367,7 +367,7 @@ export default function Home() {
               <div className={styles.profileColumn}>
                 <div className={styles.profilePicture}>
                   <Image
-                    src="/path/to/your/profile-picture.jpg"
+                    src="/profilepicture.png"
                     alt="Seb Hall"
                     width={150}
                     height={150}
