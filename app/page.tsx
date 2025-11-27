@@ -44,6 +44,7 @@ export default function Home() {
   const balatroSFX = useRef<HTMLAudioElement | null>(null);
   const threeypSFX = useRef<HTMLAudioElement | null>(null);
   const noexcusesSFX = useRef<HTMLAudioElement | null>(null);
+  const scrabdleSFX = useRef<HTMLAudioElement | null>(null);
 
 
   const handleIconMouseEnter = () => {
@@ -96,6 +97,8 @@ export default function Home() {
     threeypSFX.current.volume = 0.05;
     noexcusesSFX.current = new Audio('/sfx/noexcusesSFX.mp3')
     noexcusesSFX.current.volume = 0.1;
+    scrabdleSFX.current = new Audio('/sfx/scrabdleSFX.mp3')
+    scrabdleSFX.current.volume = 0.05;
   }, []);
 
   const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
@@ -170,7 +173,15 @@ export default function Home() {
       modelSrc: '/models/noexcuses.glb',
       imageSrc: '/noexcuseslogo.png',
       soundEffect: noexcusesSFX
-    }, null, null,
+    },{
+      id: 'app5',
+      name: 'Scrabdle',
+      icon: '/scrabdleicon.png',
+      page: 'https://scrabdle.vercel.app/',
+      modelSrc: '/models/scrabdle.glb',
+      imageSrc: '/scrabdleLogo.png',
+      soundEffect: scrabdleSFX
+    }, null,
     null, null, null, null,
     null, null,
   ];
