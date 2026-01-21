@@ -23,6 +23,7 @@ interface App {
   imageSrc: string;
   soundEffect: React.MutableRefObject<HTMLAudioElement | null>
 }
+interface Doc extends App { }
 
 export default function Home() {
   const router = useRouter();
@@ -45,6 +46,7 @@ export default function Home() {
   const threeypSFX = useRef<HTMLAudioElement | null>(null);
   const noexcusesSFX = useRef<HTMLAudioElement | null>(null);
   const scrabdleSFX = useRef<HTMLAudioElement | null>(null);
+  const yendorSFX = useRef<HTMLAudioElement | null>(null);
 
 
   const handleIconMouseEnter = () => {
@@ -99,6 +101,8 @@ export default function Home() {
     noexcusesSFX.current.volume = 0.1;
     scrabdleSFX.current = new Audio('/sfx/scrabdleSFX.mp3')
     scrabdleSFX.current.volume = 0.05;
+    yendorSFX.current = new Audio('/sfx/yendorSFX.mp3')
+    yendorSFX.current.volume = 0.05;
   }, []);
 
   const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
@@ -158,6 +162,15 @@ export default function Home() {
     },
     {
       id: 'app3',
+      name: "yendor",
+      icon: "/yendoricon.png",
+      page: "/yendorpage",
+      modelSrc: "/models/yendor.glb",
+      imageSrc: "/yendorlogo.png",
+      soundEffect: yendorSFX
+    },
+    {
+      id: 'app4',
       name: 'Uni 3rd year Project',
       icon: '/carIcon.png',
       page: '/carpage',
@@ -166,15 +179,15 @@ export default function Home() {
       soundEffect: threeypSFX
     },
     {
-      id: 'app4',
+      id: 'app5',
       name: 'no excuses.',
       icon: '/noexcusesicon.png',
       page: '/noexcusespage',
       modelSrc: '/models/noexcuses.glb',
       imageSrc: '/noexcuseslogo.png',
       soundEffect: noexcusesSFX
-    },{
-      id: 'app5',
+    }, {
+      id: 'app6',
       name: 'Scrabdle',
       icon: '/scrabdleicon.png',
       page: 'https://scrabdle.vercel.app/',
@@ -183,8 +196,24 @@ export default function Home() {
       soundEffect: scrabdleSFX
     }, null,
     null, null, null, null,
-    null, null,
+    null,
   ];
+
+  /*
+  const docs: (Doc | null)[] = [
+    {
+      id: 'doc1',
+      name: 'My Resume',
+      icon: '/resume-icon.png', // Make sure to add this image
+      page: '/resume.pdf',
+      modelSrc: '/models/paper.glb', // Use a generic doc model
+      imageSrc: '/resume-logo.png',
+      soundEffect: selectSound // Reusing generic sound for now
+    },
+    null, null, null, // Empty slots
+    null, null, null, null
+  ];
+  */
 
   const stopCurrentAppSound = () => {
     if (selectedApp && selectedApp.soundEffect && selectedApp.soundEffect.current) {
@@ -220,7 +249,7 @@ export default function Home() {
         router.push(selectedApp.page);
         setTimeout(() => {
           document.body.classList.remove('fade-out');
-        }, 500); 
+        }, 500);
       }, 500);
     }
   };
@@ -260,7 +289,7 @@ export default function Home() {
         </div>
 
         {selectedApp && (
-          <ImageOverlay src={selectedApp.imageSrc} y={-150} scale={0.7} />
+          <ImageOverlay src={selectedApp.imageSrc} />
         )}
         <div className={styles.bottomBar}>
           <div className={styles.bottomLeft}>
@@ -287,48 +316,90 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.appGrid}>
-        <h2 className={styles.gridTitle}>Projects:</h2>
-        {apps.map((app, index) => {
-          const isSelected = selectedApp && app && selectedApp.id === app.id;
-          const iconClassName = `${app ? styles.appIcon : styles.appIconEmpty} ${isSelected ? styles.appIconSelected : ''}`;
+      <div className={styles.scrollableContent}>
+        <div className={styles.appGrid}>
+          <h2 className={styles.gridTitle}>Projects:</h2>
+          {apps.map((app, index) => {
+            const isSelected = selectedApp && app && selectedApp.id === app.id;
+            const iconClassName = `${app ? styles.appIcon : styles.appIconEmpty} ${isSelected ? styles.appIconSelected : ''}`;
 
-          return (
-            <div key={index} className={styles.appIconContainer} onMouseEnter={app ? handleIconMouseEnter : undefined}
-              onMouseLeave={app ? handleIconMouseLeave : undefined}>
-              <div
-                className={iconClassName}
-                onClick={() => handleIconClick(app)}
-                data-app-name={app?.name}
-              >
-                {app ? (
-                  <div className={`${styles.appIconImageWrapper} ${isSelected ? styles.appIconImageWrapperSelected : ''}`}>
-                    <Image
-                      src={app.icon}
-                      alt={app.name}
-                      width={80}
-                      height={80}
-                      unoptimized={true}
-                    />
-                  </div>
-                ) : (
-                  <div className={styles.emptyIconImageWrapper}>
-                    <Image
-                      src="/wiichannel.gif"
-                      alt="Empty slot"
-                      width={80}
-                      height={80}
-                      unoptimized={true}
-                      className={styles.emptyIconImage}
-                    />
-                  </div>
-                )}
+            return (
+              <div key={index} className={styles.appIconContainer} onMouseEnter={app ? handleIconMouseEnter : undefined}
+                onMouseLeave={app ? handleIconMouseLeave : undefined}>
+                <div
+                  className={iconClassName}
+                  onClick={() => handleIconClick(app)}
+                  data-app-name={app?.name}
+                >
+                  {app ? (
+                    <div className={`${styles.appIconImageWrapper} ${isSelected ? styles.appIconImageWrapperSelected : ''}`}>
+                      <Image
+                        src={app.icon}
+                        alt={app.name}
+                        width={80}
+                        height={80}
+                        unoptimized={true}
+                      />
+                    </div>
+                  ) : (
+                    <div className={styles.emptyIconImageWrapper}>
+                      <Image
+                        src="/wiichannel.gif"
+                        alt="Empty slot"
+                        width={80}
+                        height={80}
+                        unoptimized={true}
+                        className={styles.emptyIconImage}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+        {/* <div className={styles.docGrid}>
+          <h2 className={styles.gridTitle}>Documents:</h2>
+          {docs.map((doc, index) => {
+            const isSelected = selectedApp && doc && selectedApp.id === doc.id;
+            const iconClassName = `${doc ? styles.appIcon : styles.appIconEmpty} ${isSelected ? styles.appIconSelected : ''}`;
 
+            return (
+              <div key={`doc-${index}`} className={styles.appIconContainer} onMouseEnter={doc ? handleIconMouseEnter : undefined}
+                onMouseLeave={doc ? handleIconMouseLeave : undefined}>
+                <div
+                  className={iconClassName}
+                  onClick={() => handleIconClick(doc)}
+                  data-app-name={doc?.name}
+                >
+                  {doc ? (
+                    <div className={`${styles.appIconImageWrapper} ${isSelected ? styles.appIconImageWrapperSelected : ''}`}>
+                      <Image
+                        src={doc.icon}
+                        alt={doc.name}
+                        width={80}
+                        height={80}
+                        unoptimized={true}
+                      />
+                    </div>
+                  ) : (
+                    <div className={styles.emptyIconImageWrapper}>
+                      <Image
+                        src="/wiichannel.gif" // Or a different empty static for docs
+                        alt="Empty slot"
+                        width={80}
+                        height={80}
+                        unoptimized={true}
+                        className={styles.emptyIconImage}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div> */}
+      </div>
       <div className={styles.startButtonContainer}>
         <button
           className={styles.startButton}

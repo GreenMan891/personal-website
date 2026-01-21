@@ -1,4 +1,3 @@
-
 .pageWrapper {
     display: flex;
     min-height: 100vh;
@@ -8,21 +7,22 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 1100px;
+    width: 68.75rem;
     background-color: #999999;
     color: white;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
     border: 1px solid #cac8c1;
 }
+
 .topBar {
     background-image: repeating-linear-gradient(to bottom,
             #dbdbdb,
             #dbdbdb 2px,
             #b3b3b3 5px,
             #b3b3b3 5px);
-    background-size: 100% 10px;
-    padding: 10px 10px;
+    background-size: 100% 0.625rem;
+    padding: 0.625rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,10 +31,42 @@
     position: relative;
 }
 
+.backButton {
+    position: absolute;
+    left: 0.625rem;
+    padding: 0.5rem 0.8rem;
+    background: linear-gradient(to bottom, #e6e5e0, #cac8c1);
+    border: 2px solid #a0a0a0;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 10;
+}
+
+.backButton::before {
+    content: '◀';
+    font-size: 0.7rem;
+    color: #666;
+}
+
+.backButton:hover {
+    background: linear-gradient(to bottom, #d6d6d6, #e4e6db);
+    border-color: #888;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateX(-2px);
+}
+
 .githubLink {
     position: absolute;
-    right: 10px;
-    padding: 8px 16px;
+    right: 0.625rem;
+    padding: 0.5rem 1rem;
     background: linear-gradient(to bottom, #e6e5e0, #cac8c1);
     border: 2px solid #a0a0a0;
     border-radius: 5px;
@@ -53,14 +85,14 @@
 }
 
 .logo {
-    height: 70px;
+    height: 4.375rem;
     object-fit: contain;
     display: block;
 }
 
 .gameArea {
-    width: 1100px;
-    height: 618.75px;
+    width: 68.75rem;
+    height: 38.67rem;
     flex-shrink: 0;
 }
 
@@ -70,12 +102,12 @@
             #dbdbdb 2px,
             #b3b3b3 5px,
             #b3b3b3 5px);
-    background-size: 100% 10px;
+    background-size: 100% 0.625rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     min-height: 0;
-    padding: 5px 0px;
+    padding: 0.3125rem 0;
 }
 
 .tabs {
@@ -95,7 +127,7 @@
     border-top: 2px solid #a0a0a0;
     border-bottom: 2px solid #a0a0a0;
 
-    padding: 12px 20px;
+    padding: 0.75rem 1.25rem;
     cursor: pointer;
     font-family: 'Open Sans';
     font-size: 1rem;
@@ -122,7 +154,7 @@
 
 .content {
     overflow-y: auto;
-    padding: 15px 20px;
+    padding: 0.9375rem 1.25rem;
     flex-grow: 1;
 }
 
@@ -241,6 +273,7 @@
     border-radius: 4px;
     border: 2px solid #a0a0a0;
 }
+
 .gameplayGif2 {
     flex-basis: 40%;
     max-width: 40%;
@@ -639,36 +672,37 @@
     max-width: 100%;
     overflow-y: auto;
     height: auto !important;
-    
+
 }
 
 .documentContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
 }
 
 .pageWrapper {
-  width: 100%;
-  max-width: 1100px;
-  box-sizing: border-box;
-  padding: 0px;
-  background: #ffffff;
-  border-radius: 8px;
-  border: 2px solid #c0c0c0;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  overflow: hidden;
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+    padding: 0px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 2px solid #c0c0c0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
 }
 
 .pageWrapper :global(.react-pdf__Page) {
-  width: 100% !important;
-  box-sizing: border-box;
+    width: 100% !important;
+    box-sizing: border-box;
 }
+
 .pageWrapper :global(.react-pdf__Page) canvas {
-  width: 100% !important;
-  height: auto !important;
-  display: block;
+    width: 100% !important;
+    height: auto !important;
+    display: block;
 }

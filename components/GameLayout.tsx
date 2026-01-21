@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import styles from './GameLayout.module.css';
 
 export interface Tab {
@@ -57,6 +58,9 @@ const GameLayout: React.FC<GameLayoutProps> = ({
     return (
         <div className={styles.container}>
             <header className={styles.topBar}>
+                <Link href="/" className={styles.backButton}>
+                    Back
+                </Link>
                 {headerContent}
                 {githubLink && (
                     <a

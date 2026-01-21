@@ -1,18 +1,27 @@
-
 .overlayWrap {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  inset: 0;
   z-index: 2;
-  display: block;
-  transform-origin: center center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  /* Align logo to the top, sharing space with the status bar */
+  padding-top: 0.5rem;
+  padding-bottom: 2rem;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .overlayImg {
   display: block;
-  width: 100%;
+  /* Stricter constraints for consistent sizing */
+  max-width: 50%;
+  max-height: 50%;
+  width: auto;
   height: auto;
-  max-height: 100vh;
+  object-fit: contain;
   pointer-events: none;
   user-select: none;
+  /* Subtle shadow for better visibility against backgrounds */
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
