@@ -105,15 +105,11 @@ export default function YendorPage() {
                     <div className={styles.downloadColumnsWrapper} style={{ flex: 1, minHeight: 0 }}>
                         <div className={styles.guideSection} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                             <p style={{ margin: 0 }}>Write code in the custom nh language in order to navigate the dungeon, collect gold, and defeat kobolds.</p>
-                            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px dashed #a0a0a0', borderRadius: '4px', minHeight: '120px' }}>
-                                <p style={{ color: '#666', fontStyle: 'italic' }}>Gif of bot navigation goes here</p>
-                            </div>
+                            <img src="/yendorpage/yendorhotto.gif" alt="Navigating the Dungeon" className={styles.sideImage} style={{ flex: 1, objectFit: 'cover', minHeight: 0 }} />
                         </div>
                         <div className={styles.guideSection} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                             <p style={{ margin: 0 }}>The skill tree lets you upgrade your bot's speed, the gold it earns, the damage it deals, and more.</p>
-                            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px dashed #a0a0a0', borderRadius: '4px', minHeight: '120px' }}>
-                                <p style={{ color: '#666', fontStyle: 'italic' }}>Gif of upgrades/code goes here</p>
-                            </div>
+                            <img src="/yendorpage/yendorupgrade.gif" alt="Coding & Upgrades" className={styles.sideImage} style={{ flex: 1, objectFit: 'cover', minHeight: 0 }} />
                         </div>
                     </div>
                 </div>
