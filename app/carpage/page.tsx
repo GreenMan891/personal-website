@@ -53,13 +53,13 @@ export default function Carpage() {
                     </div>
                     <div className={styles.designImageColumn}>
                         <div className={styles.designImageItem}>
-                            <img src="/carpage/carPageProto.png" alt="Early concept sketch or UI mockup" className={styles.designImage} />
+                            <img src="/carPage/carPageProto.png" alt="Early concept sketch or UI mockup" className={styles.designImage} />
                         </div>
                         <div className={styles.designImageItem}>
-                            <img src="/carpage/carPageLuigi.png" alt="Gameplay screenshot showing a specific mechanic" className={styles.designImage} />
+                            <img src="/carPage/carPageLuigi.png" alt="Gameplay screenshot showing a specific mechanic" className={styles.designImage} />
                         </div>
                         <div className={styles.designImageItem}>
-                            <img src="/carpage/carPageFinal.png" alt="Score screen or multiplier effect" className={styles.designImage} />
+                            <img src="/carPage/carPageFinal.png" alt="Score screen or multiplier effect" className={styles.designImage} />
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@ export default function Carpage() {
             <div className={styles.pageWrapper}>
                 <GameLayout
                     headerContent={
-                        <img src="/carpage/carLogoForPage2.png" alt="Logo" className={styles.logo} />
+                        <img src="/carPage/carLogoForPage2.png" alt="Logo" className={styles.logo} />
                     }
                     githubLink='https://github.com/GreenMan891/Creating-a-Racing-Game-in-Unity'
                     tabs={carTabs}
