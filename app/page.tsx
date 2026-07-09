@@ -205,10 +205,10 @@ export default function Home() {
     {
       id: 'doc2',
       name: 'Curve UI',
-      icon: '/curveuiicon.png', // Make sure to add this image
+      icon: '/CurveUIIcon.png', // Make sure to add this image
       page: '/curveuipage',
       modelSrc: '/models/curveui.glb', // Use a generic doc model
-      imageSrc: '/curveUilogo.png',
+      imageSrc: '/CurveUILogo.png',
       soundEffect: curveUISFX // Reusing generic sound for now
     }, null, null, // Empty slots
     null, null, null, null
