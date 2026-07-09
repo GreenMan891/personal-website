@@ -106,11 +106,11 @@ export default function CurveUIPage() {
                     <div className={styles.downloadColumnsWrapper} style={{ flex: 1, minHeight: 0 }}>
                         <div className={styles.guideSection} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                             <p style={{ margin: 0 }}>I created two animated backgrounds for the theme, Echoing the Frutiger Aero aesthetic, that when synced up show light flowing seamlessly from one screen to the other.</p>
-                            <img src="/curveUIpage/curveUIwallpaper.png" alt="Navigating the Dungeon" className={styles.sideImage} style={{ flex: 1, objectFit: 'cover', minHeight: 0 }} />
+                            <img src="/curveUIpage/curveUIWallpaper.png" alt="Navigating the Dungeon" className={styles.sideImage} style={{ flex: 1, objectFit: 'cover', minHeight: 0 }} />
                         </div>
                         <div className={styles.guideSection} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                             <p style={{ margin: 0 }}>I also created custom icons and heroes for every console playable on Android, from the NES all the way to the Switch. The designs use UsagiShade's iiSU icons as a template, with each console's primary colours in the background.</p>
-                            <img src="/curveUIpage/curveUIicons.png" alt="Coding & Upgrades" className={styles.sideImage} style={{ flex: 1, objectFit: 'cover', minHeight: 0 }} />
+                            <img src="/curveUIpage/curveUIIcons.png" alt="Coding & Upgrades" className={styles.sideImage} style={{ flex: 1, objectFit: 'cover', minHeight: 0 }} />
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@ export default function CurveUIPage() {
             <div className={styles.pageWrapper}>
                 <GameLayout
                     headerContent={
-                        <img src="/CurveUILogo2.png" alt="CurveUI Logo" className={styles.logo} />
+                        <img src="/curveUILogo2.png" alt="CurveUI Logo" className={styles.logo} />
                     }
                     githubLink='https://cocoon-shell.com/themes/?type=theme&id=curve-ui-d09000'
                     githubText='Theme Store'

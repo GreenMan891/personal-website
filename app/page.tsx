@@ -102,7 +102,7 @@ export default function Home() {
     noexcusesSFX.current = initAudio('/sfx/noexcusesSFX.mp3', 0.05);
     scrabdleSFX.current = initAudio('/sfx/scrabdleSFX.mp3', 0.05);
     yendorSFX.current = initAudio('/sfx/yendorSFX.mp3', 0.05);
-    curveUISFX.current = initAudio('/sfx/curveUISFX.mp3', 0.05);
+    curveUISFX.current = initAudio('/sfx/CurveUISFX.mp3', 0.05);
   }, []);
 
   const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
