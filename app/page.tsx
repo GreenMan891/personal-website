@@ -11,6 +11,7 @@ import ModelViewer from '../components/ModelViewer';
 import ImageOverlay from '../components/ImageOverlay';
 import { select } from 'three/tsl';
 import MiniModelViewer from '../components/MiniModelViewer';
+import { useVolume } from '../components/VolumeContext';
 
 
 
@@ -27,6 +28,7 @@ interface Doc extends App { }
 
 export default function Home() {
   const router = useRouter();
+  const { volumeMultiplier } = useVolume();
   const [selectedApp, setSelectedApp] = useState<App | null>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [startCount, setStartCount] = useState(0);
@@ -47,6 +49,7 @@ export default function Home() {
   const noexcusesSFX = useRef<HTMLAudioElement | null>(null);
   const scrabdleSFX = useRef<HTMLAudioElement | null>(null);
   const yendorSFX = useRef<HTMLAudioElement | null>(null);
+  const curveUISFX = useRef<HTMLAudioElement | null>(null);
 
 
   const handleIconMouseEnter = () => {
@@ -79,34 +82,34 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    selectSound.current = new Audio('/sfx/select.wav');
-    selectSound.current.volume = 0.3;
-    deselectSound.current = new Audio('/sfx/deselect.wav');
-    deselectSound.current.volume = 0.3;
-    hoverSound.current = new Audio('/sfx/hover.wav')
-    hoverSound.current.volume = 0.2
-    hover2Sound.current = new Audio('/sfx/hoverSecond.wav');
-    hover2Sound.current.volume = 0.2;
-    startSound.current = new Audio('/sfx/start.wav')
-    startSound.current.volume = 0.3
+    const initAudio = (src: string, baseVol: number) => {
+      const audio = new Audio(src);
+      audio.volume = baseVol;
+      (audio as any).__baseVolume = baseVol;
+      return audio;
+    };
+
+    selectSound.current = initAudio('/sfx/select.wav', 0.3);
+    deselectSound.current = initAudio('/sfx/deselect.wav', 0.3);
+    hoverSound.current = initAudio('/sfx/hover.wav', 0.2);
+    hover2Sound.current = initAudio('/sfx/hoverSecond.wav', 0.2);
+    startSound.current = initAudio('/sfx/start.wav', 0.3);
 
     //Game Sounds
-    hexaSFX.current = new Audio('/sfx/hexaSFX.mp3')
-    hexaSFX.current.volume = 0.1;
-    balatroSFX.current = new Audio('/sfx/balatroSFX.mp3')
-    balatroSFX.current.volume = 0.25;
-    threeypSFX.current = new Audio('/sfx/threeypSFX.mp3')
-    threeypSFX.current.volume = 0.05;
-    noexcusesSFX.current = new Audio('/sfx/noexcusesSFX.mp3')
-    noexcusesSFX.current.volume = 0.1;
-    scrabdleSFX.current = new Audio('/sfx/scrabdleSFX.mp3')
-    scrabdleSFX.current.volume = 0.05;
-    yendorSFX.current = new Audio('/sfx/yendorSFX.mp3')
-    yendorSFX.current.volume = 0.05;
+    hexaSFX.current = initAudio('/sfx/hexaSFX.mp3', 0.1);
+    balatroSFX.current = initAudio('/sfx/balatroSFX.mp3', 0.25);
+    threeypSFX.current = initAudio('/sfx/threeypSFX.mp3', 0.05);
+    noexcusesSFX.current = initAudio('/sfx/noexcusesSFX.mp3', 0.05);
+    scrabdleSFX.current = initAudio('/sfx/scrabdleSFX.mp3', 0.05);
+    yendorSFX.current = initAudio('/sfx/yendorSFX.mp3', 0.05);
+    curveUISFX.current = initAudio('/sfx/curveUISFX.mp3', 0.05);
   }, []);
 
   const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
     if (audioRef.current) {
+      audioRef.current.volume = (audioRef.current as any).__baseVolume != null
+        ? (audioRef.current as any).__baseVolume * volumeMultiplier
+        : volumeMultiplier;
       audioRef.current.currentTime = 0;
       audioRef.current.play().catch((e) => console.warn("Sound blocked", e));
     }
@@ -162,15 +165,6 @@ export default function Home() {
     },
     {
       id: 'app3',
-      name: "yendor",
-      icon: "/yendoricon.png",
-      page: "/yendorpage",
-      modelSrc: "/models/yendor.glb",
-      imageSrc: "/yendorlogo.png",
-      soundEffect: yendorSFX
-    },
-    {
-      id: 'app4',
       name: 'Uni 3rd year Project',
       icon: '/carIcon.png',
       page: '/carpage',
@@ -179,7 +173,7 @@ export default function Home() {
       soundEffect: threeypSFX
     },
     {
-      id: 'app5',
+      id: 'app4',
       name: 'no excuses.',
       icon: '/noexcusesicon.png',
       page: '/noexcusespage',
@@ -187,7 +181,7 @@ export default function Home() {
       imageSrc: '/noexcuseslogo.png',
       soundEffect: noexcusesSFX
     }, {
-      id: 'app6',
+      id: 'app5',
       name: 'Scrabdle',
       icon: '/scrabdleicon.png',
       page: 'https://scrabdle.vercel.app/',
@@ -195,25 +189,30 @@ export default function Home() {
       imageSrc: '/scrabdleLogo.png',
       soundEffect: scrabdleSFX
     }, null,
-    null, null, null, null,
-    null,
+    null, null
   ];
 
-  /*
   const docs: (Doc | null)[] = [
     {
       id: 'doc1',
-      name: 'My Resume',
-      icon: '/resume-icon.png', // Make sure to add this image
-      page: '/resume.pdf',
-      modelSrc: '/models/paper.glb', // Use a generic doc model
-      imageSrc: '/resume-logo.png',
-      soundEffect: selectSound // Reusing generic sound for now
+      name: 'yendor',
+      icon: '/yendoricon.png', // Make sure to add this image
+      page: '/yendorpage',
+      modelSrc: '/models/yendor.glb', // Use a generic doc model
+      imageSrc: '/yendorlogo.png',
+      soundEffect: yendorSFX // Reusing generic sound for now
     },
-    null, null, null, // Empty slots
+    {
+      id: 'doc2',
+      name: 'Curve UI',
+      icon: '/curveuiicon.png', // Make sure to add this image
+      page: '/curveuipage',
+      modelSrc: '/models/curveui.glb', // Use a generic doc model
+      imageSrc: '/curveUilogo.png',
+      soundEffect: curveUISFX // Reusing generic sound for now
+    }, null, null, // Empty slots
     null, null, null, null
   ];
-  */
 
   const stopCurrentAppSound = () => {
     if (selectedApp && selectedApp.soundEffect && selectedApp.soundEffect.current) {
@@ -318,7 +317,7 @@ export default function Home() {
 
       <div className={styles.scrollableContent}>
         <div className={styles.appGrid}>
-          <h2 className={styles.gridTitle}>Projects:</h2>
+          <h2 className={styles.gridTitle}>Programming Projects:</h2>
           {apps.map((app, index) => {
             const isSelected = selectedApp && app && selectedApp.id === app.id;
             const iconClassName = `${app ? styles.appIcon : styles.appIconEmpty} ${isSelected ? styles.appIconSelected : ''}`;
@@ -358,8 +357,8 @@ export default function Home() {
             );
           })}
         </div>
-        {/* <div className={styles.docGrid}>
-          <h2 className={styles.gridTitle}>Documents:</h2>
+        {<div className={styles.docGrid}>
+          <h2 className={styles.gridTitle}>Design Projects:</h2>
           {docs.map((doc, index) => {
             const isSelected = selectedApp && doc && selectedApp.id === doc.id;
             const iconClassName = `${doc ? styles.appIcon : styles.appIconEmpty} ${isSelected ? styles.appIconSelected : ''}`;
@@ -398,7 +397,7 @@ export default function Home() {
               </div>
             );
           })}
-        </div> */}
+        </div>}
       </div>
       <div className={styles.startButtonContainer}>
         <button

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Open_Sans } from "next/font/google";
 import "./globals.css";
 import FadeInOverlay from "../components/FadeInOverlay";
+import { VolumeProvider } from "../components/VolumeContext";
+import VolumeSlider from "../components/VolumeSlider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,12 +35,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} ${openSans.variable}`}>
-        <div className="mainContentWrapper">
-          <FadeInOverlay />
-          <div className="mainContentColumn">
-            {children}
+        <VolumeProvider>
+          <div className="mainContentWrapper">
+            <FadeInOverlay />
+            <div className="mainContentColumn">
+              {children}
+            </div>
           </div>
-        </div>
+          <VolumeSlider />
+        </VolumeProvider>
       </body>
     </html>
   );

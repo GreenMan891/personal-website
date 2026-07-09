@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import type { FC } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
+import { useVolume } from "./VolumeContext";
 
 type UnityGameProps = {
   buildPath?: string;
@@ -18,6 +19,8 @@ const UnityGame: FC<UnityGameProps> = ({
   onReady,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const { volumeMultiplier } = useVolume();
+  const gainNodeRef = useRef<GainNode | null>(null);
 
   const loaderUrl = useMemo(() => `${buildPath}/Build/WebBuild.loader.js`, [buildPath]);
   const dataUrl = useMemo(() => `${buildPath}/Build/WebBuild.data.unityweb`, [buildPath]);
@@ -34,6 +37,63 @@ const UnityGame: FC<UnityGameProps> = ({
   useEffect(() => {
     if (isLoaded && typeof onReady === "function") onReady();
   }, [isLoaded, onReady]);
+
+  // Monkey-patch AudioContext to intercept Unity's audio with a master gain node.
+  // This runs once on mount (before Unity creates its AudioContext) and
+  // redirects all connect(destination) calls through our gain node.
+  useEffect(() => {
+    const win = window as any;
+    if (win.__unityVolumePatchApplied) return;
+    win.__unityVolumePatchApplied = true;
+
+    const OrigAudioContext = win.AudioContext || win.webkitAudioContext;
+    if (!OrigAudioContext) return;
+
+    const origPrototypeConnect = AudioNode.prototype.connect;
+
+    win.AudioContext = function (...args: any[]) {
+      const ctx = new OrigAudioContext(...args);
+      const masterGain = ctx.createGain();
+      masterGain.gain.value = volumeMultiplier;
+      origPrototypeConnect.call(masterGain, ctx.destination);
+
+      gainNodeRef.current = masterGain;
+
+      // Store the real destination and our gain on the context
+      (ctx as any).__realDestination = ctx.destination;
+      (ctx as any).__masterGain = masterGain;
+
+      // Override the destination property to return our gain node
+      Object.defineProperty(ctx, 'destination', {
+        get() {
+          return masterGain;
+        }
+      });
+
+      return ctx;
+    };
+    win.AudioContext.prototype = OrigAudioContext.prototype;
+
+    if (win.webkitAudioContext) {
+      win.webkitAudioContext = win.AudioContext;
+    }
+
+    return () => {
+      // Restore on unmount
+      win.AudioContext = OrigAudioContext;
+      if (win.webkitAudioContext) {
+        win.webkitAudioContext = OrigAudioContext;
+      }
+      win.__unityVolumePatchApplied = false;
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Update gain when volume changes
+  useEffect(() => {
+    if (gainNodeRef.current) {
+      gainNodeRef.current.gain.value = volumeMultiplier;
+    }
+  }, [volumeMultiplier]);
 
   const findCanvas = () => {
     const root = containerRef.current;

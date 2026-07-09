@@ -1,0 +1,107 @@
+.volumeContainer {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 0;
+}
+
+.volumeButton {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  border: 3px solid #00BFFF;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-out;
+  color: #555;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.volumeButton:hover {
+  transform: translateY(-3px);
+  color: #000;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 15px 5px rgba(0, 191, 255, 0.5);
+}
+
+.volumeButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
+}
+
+.sliderPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #f0f0f0, #d8d8d8);
+  border: 3px solid #00BFFF;
+  border-bottom: none;
+  border-radius: 1.5rem 1.5rem 0 0;
+  padding: 1rem 0.5rem 0.75rem 0.5rem;
+  margin-bottom: -1.75rem;
+  width: 3.5rem;
+  overflow: hidden;
+  z-index: 1;
+
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease,
+              padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sliderPanelOpen {
+  max-height: 12rem;
+  opacity: 1;
+  padding: 1rem 0.5rem 1.75rem 0.5rem;
+}
+
+.sliderTrack {
+  position: relative;
+  width: 6px;
+  height: 8rem;
+  background: #bbb;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.sliderFill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 3px;
+  background: linear-gradient(to top, #00BFFF, #33ddff);
+  pointer-events: none;
+}
+
+.sliderThumb {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffffff, #e0e0e0);
+  border: 2px solid #00BFFF;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  pointer-events: none;
+}
+
+.sliderThumb:active {
+  cursor: grabbing;
+}

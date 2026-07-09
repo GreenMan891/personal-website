@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styles from './GameLayout.module.css';
+import { useVolume } from './VolumeContext';
 
 export interface Tab {
     id: string;
@@ -14,6 +15,7 @@ interface GameLayoutProps {
     children: React.ReactNode;
     headerContent: React.ReactNode;
     githubLink: string;
+    githubText?: string;
     tabs: Tab[];
 }
 
@@ -21,22 +23,31 @@ const GameLayout: React.FC<GameLayoutProps> = ({
     children,
     headerContent,
     githubLink,
+    githubText = "Source Code",
     tabs = []
 }) => {
+    const { volumeMultiplier } = useVolume();
     const [activeTabId, setActiveTabId] = useState<string>(tabs[0]?.id);
     const [visitedTabs, setVisitedTabs] = useState<Record<string, boolean>>({});
     const selectSound = useRef<HTMLAudioElement | null>(null);
     const deselectSound = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
-        selectSound.current = new Audio('/sfx/buttonIn.wav');
-        selectSound.current.volume = 0.2;
-        deselectSound.current = new Audio('/sfx/buttonOut.wav')
-        deselectSound.current.volume = 0.3
+        const initAudio = (src: string, baseVol: number) => {
+            const audio = new Audio(src);
+            audio.volume = baseVol;
+            (audio as any).__baseVolume = baseVol;
+            return audio;
+        };
+        selectSound.current = initAudio('/sfx/buttonIn.wav', 0.2);
+        deselectSound.current = initAudio('/sfx/buttonOut.wav', 0.3);
     }, []);
 
     const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
         if (audioRef.current) {
+            audioRef.current.volume = (audioRef.current as any).__baseVolume != null
+                ? (audioRef.current as any).__baseVolume * volumeMultiplier
+                : volumeMultiplier;
             audioRef.current.currentTime = 0;
             audioRef.current.play().catch((e) => console.warn("Sound blocked", e));
         }
@@ -69,7 +80,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({
                         rel="noopener noreferrer"
                         className={styles.githubLink}
                     >
-                        Source Code
+                        {githubText}
                     </a>
                 )}
             </header>
