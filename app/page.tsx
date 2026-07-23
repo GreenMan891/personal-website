@@ -50,6 +50,7 @@ export default function Home() {
   const scrabdleSFX = useRef<HTMLAudioElement | null>(null);
   const yendorSFX = useRef<HTMLAudioElement | null>(null);
   const curveUISFX = useRef<HTMLAudioElement | null>(null);
+  const bingletonSFX = useRef<HTMLAudioElement | null>(null);
 
 
   const handleIconMouseEnter = () => {
@@ -103,6 +104,7 @@ export default function Home() {
     scrabdleSFX.current = initAudio('/sfx/scrabdleSFX.mp3', 0.05);
     yendorSFX.current = initAudio('/sfx/yendorSFX.mp3', 0.05);
     curveUISFX.current = initAudio('/sfx/CurveUISFX.mp3', 0.05);
+    bingletonSFX.current = initAudio('/sfx/BingletonSFX.mp3', 0.05);
   }, []);
 
   const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
@@ -210,7 +212,16 @@ export default function Home() {
       modelSrc: '/models/curveui.glb', // Use a generic doc model
       imageSrc: '/CurveUILogo.png',
       soundEffect: curveUISFX // Reusing generic sound for now
-    }, null, null, // Empty slots
+    },
+    {
+      id: 'doc3',
+      name: 'Bingleton',
+      icon: '/BingletonIcon.png',
+      page: 'https://docs.google.com/document/d/1N1vJH4BR2swzXKJaA-8GDXRe5Usa1-wOmURUUyiah-A',
+      modelSrc: '/models/bingleton.glb',
+      imageSrc: '/BingletonLogo2.png',
+      soundEffect: bingletonSFX
+    }, null, // Empty slots
     null, null, null, null
   ];
 
